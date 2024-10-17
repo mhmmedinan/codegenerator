@@ -1,0 +1,2 @@
+1728832098166:create-project test
+package com.${ projectName?lower_case}.application.features.${ entity.name | string.camelcase }.commands.create;
