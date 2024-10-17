@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-@Command(name = "generate-crud", mixinStandardHelpOptions = true, description = "Generate CRUD operations")
+
 @Getter
 @Setter
 public class GenerateCrudCliCommandSettings {
