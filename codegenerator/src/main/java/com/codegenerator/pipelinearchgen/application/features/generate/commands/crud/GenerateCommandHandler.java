@@ -43,19 +43,28 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
     }
 
         private Collection<String> generatePersistenceCodes(String projectPath, CrudTemplateData crudTemplateData){
-        String templateDir = PlatformHelper.securedPathJoin("D:\\Projects\\codegenerator\\codegenerator\\src\\main\\java\\com\\codegenerator\\pipelinearchgen\\domain\\", Templates.Paths.CRUD,"folders","persistence");
+            String templateDir = PlatformHelper.securedPathJoin(
+                    DirectoryHelper.getAssemblyDirectory(),
+                     Templates.Paths.CRUD, "folders", "persistence"
+            );
         return generateFolderCodes(templateDir,PlatformHelper.securedPathJoin(projectPath,"persistence"),crudTemplateData);
 
     }
 
     private Collection<String> generateApplicationCodes(String projectPath, CrudTemplateData crudTemplateData){
-        String templateDir = PlatformHelper.securedPathJoin("D:\\Projects\\codegenerator\\codegenerator\\src\\main\\java\\com\\codegenerator\\pipelinearchgen\\domain\\", Templates.Paths.CRUD,"folders","application");
+        String templateDir = PlatformHelper.securedPathJoin(
+                DirectoryHelper.getAssemblyDirectory(),
+                 Templates.Paths.CRUD, "folders", "application"
+        );
         return generateFolderCodes(templateDir,PlatformHelper.securedPathJoin(projectPath,"application"),crudTemplateData);
 
     }
 
     private Collection<String> generateWebAPICodes(String projectPath, CrudTemplateData crudTemplateData){
-        String templateDir = PlatformHelper.securedPathJoin("D:\\Projects\\codegenerator\\codegenerator\\src\\main\\java\\com\\codegenerator\\pipelinearchgen\\domain\\", Templates.Paths.CRUD,"folders","webapi");
+        String templateDir = PlatformHelper.securedPathJoin(
+                DirectoryHelper.getAssemblyDirectory(),
+                 Templates.Paths.CRUD, "folders", "webapi"
+        );
         return generateFolderCodes(templateDir,PlatformHelper.securedPathJoin(projectPath,"webapi"),crudTemplateData);
 
     }

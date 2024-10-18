@@ -4,7 +4,9 @@ import com.codegenerator.core.codegen.helpers.PlatformHelper;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,39 +17,20 @@ import java.util.Stack;
 public class DirectoryHelper {
 
     public static String getAssemblyDirectory() {
-       /* try {
-            String codeBase = PlatformHelper.getDirectoryHeader() +
-                    DirectoryHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-            String codeBaseLocation =  DirectoryHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-            System.out.println("Location" + codeBaseLocation);
-            Path path = Paths.get(codeBase);
-            Path parentPath = path.getParent();
+        String classpath = System.getProperty("java.class.path");
+        String[] paths = classpath.split(File.pathSeparator);
 
-            if (parentPath == null) {
-                throw new IllegalArgumentException("Parent directory not found for path: " + codeBase);
-            }
+        if (paths.length > 0) {
+            Path firstPath = Paths.get(paths[0]);
+            Path projectRoot = firstPath.getParent().getParent();
 
-            return parentPath.toString();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }*/
-
-        try {
-            Path path = Paths.get(DirectoryHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            File file = new File(path.toString());
-
-            if (file.exists() && file.isFile()) {
-                return file.getParentFile().getAbsolutePath();
-            } else if (file.isDirectory()) {
-                return file.getAbsolutePath();
-            } else {
-                throw new IllegalArgumentException("Assembly directory is invalid or not found.");
-            }
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("URI Syntax Exception: " + e.getMessage());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Parent directory not found: " + e.getMessage());
+            // Dizinleri tek noktada toplamak
+            Path templatePath = projectRoot.resolve(Paths.get("src", "main", "java", "com", "codegenerator", "pipelinearchgen", "domain"));
+            return templatePath.toString(); // İstenen dizini döndür
         }
+
+        throw new RuntimeException("Could not determine project root directory");
+
     }
 
 

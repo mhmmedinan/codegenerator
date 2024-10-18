@@ -17,17 +17,5 @@ public class PlatformHelper {
         return path;
     }
 
-    public static String getDirectoryHeader() {
-        String file;
-        String os = System.getProperty("os.name").toLowerCase();
-
-        if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
-            file = "file://";
-        } else {
-            file = "";
-        }
-
-        return file;
-    }
 }
 
