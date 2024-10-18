@@ -1,15 +1,12 @@
 package com.codegenerator.core.codegen.code.valueobjects;
 
-/**
- * A class representing property information, including its name, type, access modifier, and namespace.
- */
+
 public class PropertyInfo {
     private String name;
     private String type;
     private String accessModifier;
-    private String nameSpace; // Optional field, can be null
+    private String nameSpace;
 
-    // Default constructor
     public PropertyInfo() {
     }
 

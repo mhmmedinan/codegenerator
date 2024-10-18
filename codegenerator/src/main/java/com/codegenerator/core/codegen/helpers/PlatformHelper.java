@@ -1,7 +1,5 @@
 package com.codegenerator.core.codegen.helpers;
 
-import java.util.StringJoiner;
-
 public class PlatformHelper {
 
     public static String securedPathJoin(String... pathItems) {

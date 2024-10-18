@@ -11,19 +11,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/**
- * Utility class for file operations.
- * Provides methods to create files, remove lines based on a predicate, and remove specific content from files.
- */
 public class FileHelper {
 
-    /**
-     * Asynchronously creates a file with the specified content.
-     *
-     * @param filePath    The path of the file to create.
-     * @param fileContent The content to write to the file.
-     * @throws IOException if an I/O error occurs.
-     */
     public static CompletableFuture<Void> createFileAsync(String filePath, String fileContent) {
         return CompletableFuture.runAsync(() -> {
             try {
@@ -42,13 +31,6 @@ public class FileHelper {
 
     }
 
-    /**
-     * Asynchronously removes lines from a file that match a given predicate.
-     *
-     * @param filePath The path of the file to modify.
-     * @param predicate The predicate to determine which lines to remove.
-     * @throws IOException if an I/O error occurs.
-     */
     public static CompletableFuture<Void> removeLinesAsync(String filePath, Predicate<String> predicate) {
         return CompletableFuture.runAsync(() -> {
             try {
@@ -63,13 +45,7 @@ public class FileHelper {
         });
     }
 
-    /**
-     * Asynchronously removes specific contents from a file.
-     *
-     * @param filePath The path of the file to modify.
-     * @param contents The contents to remove from the file.
-     * @throws IOException if an I/O error occurs.
-     */
+
     public static CompletableFuture<Void> removeContentAsync(String filePath, List<String> contents) {
         return CompletableFuture.runAsync(() -> {
             try {

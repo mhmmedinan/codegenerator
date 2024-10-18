@@ -19,7 +19,7 @@ public class FreemarkerTemplateRenderer implements TemplateRenderer {
 
     @Override
     public String getTemplateExtension() {
-        return "ftl"; // FreeMarker şablon uzantısı
+        return "ftl";
     }
 
     @Override

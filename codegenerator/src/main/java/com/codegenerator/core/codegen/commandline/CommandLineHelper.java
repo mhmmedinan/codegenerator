@@ -21,8 +21,8 @@ public class CommandLineHelper {
     public static CompletableFuture<String> runCommandAsync(String command) {
         return CompletableFuture.supplyAsync(() -> {
             ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command(getOSCommandLine(), "-c", command); // Bash veya sh için -c parametresi
-            processBuilder.redirectErrorStream(true); // Hataları standart çıktıya yönlendir
+            processBuilder.command(getOSCommandLine(), "-c", command);
+            processBuilder.redirectErrorStream(true);
 
             StringBuilder output = new StringBuilder();
 
@@ -35,7 +35,7 @@ public class CommandLineHelper {
                     output.append(line).append("\n");
                 }
 
-                int exitCode = process.waitFor(); // Komutun çıkış kodunu al
+                int exitCode = process.waitFor();
                 if (exitCode != 0) {
                     throw new IOException("Command exited with error code: " + exitCode);
                 }

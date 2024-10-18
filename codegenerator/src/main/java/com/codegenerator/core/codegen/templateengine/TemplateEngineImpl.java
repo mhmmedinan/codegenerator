@@ -8,9 +8,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-/**
- * Implementation of the TemplateEngine interface that utilizes a template renderer to render templates.
- */
 @Service
 public class TemplateEngineImpl implements TemplateEngine {
 

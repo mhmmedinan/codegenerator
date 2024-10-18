@@ -15,7 +15,6 @@ public class Entity {
         properties = new ArrayList<>();
     }
 
-    // Getter ve Setter metotları
     public String getName() {
         return name;
     }

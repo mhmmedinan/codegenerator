@@ -11,7 +11,6 @@ import com.codegenerator.pipelinearchgen.application.features.generate.commands.
 import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
 import com.codegenerator.pipelinearchgen.domain.valueobjects.Entity;
 import picocli.CommandLine.Command;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;

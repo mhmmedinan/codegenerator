@@ -20,12 +20,7 @@ public class CreateNewProjectCommand {
             DirectoryCreator.createDirectory(basePath.resolve("src/test/java/com/" + projectName.toLowerCase()));
 
             // Create application layer directories
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features/commands"));
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features/constants"));
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features/mappers"));
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features/queries"));
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features/rules"));
-            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/services"));
+            DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/application/features"));
 
             // Create domain layer directories
             DirectoryCreator.createDirectory(basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/domain/entities"));

@@ -7,7 +7,6 @@ public class QueryTemplateData implements TemplateData {
     private String featureName;
     private boolean isSecuredOperationUsed;
 
-    // Getter ve Setter metodları
     public String getQueryName() {
         return queryName;
     }

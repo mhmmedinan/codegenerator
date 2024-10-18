@@ -1,7 +1,5 @@
 package com.codegenerator.core.codegen.code;
 
-import com.codegenerator.core.codegen.code.pluralization.PluralizationProviderImpl;
-
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -82,13 +80,5 @@ public class StringUtils {
                 .collect(Collectors.joining());
     }
 
-    public static String toPlural(String value) {
-        return PluralizationProviderImpl.pluralize(value);
-    }
-
-    public static String toSingular(String value) {
-        return PluralizationProviderImpl.singularize(value);
-
-    }
 }
 

@@ -2,9 +2,7 @@ package com.codegenerator.pipelinearchgen.cli.commands.generate;
 
 import lombok.Getter;
 import lombok.Setter;
-import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -47,8 +45,6 @@ public class GenerateCrudCliCommandSettings {
         if (projects == null || projects.length == 0) {
             throw new RuntimeException("No projects found in src/main/java/com");
         }
-
-        // Projeyi com altından alıyoruz, com'u atlayarak alalım
         if (projects.length == 1) {
             projectName = projects[0].getName();
             return;
@@ -96,12 +92,10 @@ public class GenerateCrudCliCommandSettings {
     }
 
     private String selectProjectFromPrompt(File[] projects) {
-        // Implement prompt logic here (e.g., using JLine or another library)
         return projects[0].getName();
     }
 
     private String selectEntityFromPrompt(File[] entities) {
-        // Implement prompt logic here (e.g., using JLine or another library)
         return entities[0].getName().replace(".java", "");
     }
 }

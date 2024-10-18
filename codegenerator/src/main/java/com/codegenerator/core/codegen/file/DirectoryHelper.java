@@ -1,12 +1,7 @@
 package com.codegenerator.core.codegen.file;
 
-import com.codegenerator.core.codegen.helpers.PlatformHelper;
-
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,10 +18,8 @@ public class DirectoryHelper {
         if (paths.length > 0) {
             Path firstPath = Paths.get(paths[0]);
             Path projectRoot = firstPath.getParent().getParent();
-
-            // Dizinleri tek noktada toplamak
             Path templatePath = projectRoot.resolve(Paths.get("src", "main", "java", "com", "codegenerator", "pipelinearchgen", "domain"));
-            return templatePath.toString(); // İstenen dizini döndür
+            return templatePath.toString();
         }
 
         throw new RuntimeException("Could not determine project root directory");
@@ -69,7 +62,7 @@ public class DirectoryHelper {
     public static void deleteDirectory(String path) {
         try {
             Files.walk(Paths.get(path))
-                    .sorted((path1, path2) -> path2.compareTo(path1)) // Reverse order to delete files before directories
+                    .sorted((path1, path2) -> path2.compareTo(path1))
                     .forEach(p -> {
                         try {
                             Files.delete(p);
