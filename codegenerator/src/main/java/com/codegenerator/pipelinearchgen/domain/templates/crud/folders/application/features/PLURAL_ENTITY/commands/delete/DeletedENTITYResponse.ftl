@@ -1,5 +1,5 @@
 <#-- Template for a Deleted Response class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.delete;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

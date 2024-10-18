@@ -1,5 +1,5 @@
 <#-- Template for an Update Command class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.update;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.update;
 
 import an.awesome.pipelinr.Command;
 import lombok.AllArgsConstructor;

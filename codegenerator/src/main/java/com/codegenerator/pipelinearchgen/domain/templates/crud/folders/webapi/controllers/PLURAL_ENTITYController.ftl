@@ -1,10 +1,10 @@
 <#-- Template for a Controller class -->
 package com.${projectName?lower_case}.webapi.controllers;
 
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.create.Create${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.delete.Delete${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.update.Update${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.queries.getlist.GetList${entity.name?cap_first}Query;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.create.Create${entity.name?cap_first}Command;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete.Delete${entity.name?cap_first}Command;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.update.Update${entity.name?cap_first}Command;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getlist.GetList${entity.name?cap_first}Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import an.awesome.pipelinr.Pipeline;

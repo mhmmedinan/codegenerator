@@ -1,5 +1,5 @@
 <#-- Template for an Updated Response class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.update;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.update;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

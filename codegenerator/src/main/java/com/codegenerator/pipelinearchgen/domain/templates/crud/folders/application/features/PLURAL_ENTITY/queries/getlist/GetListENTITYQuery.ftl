@@ -1,5 +1,5 @@
 <#-- Template for a Get List Query class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.queries.getlist;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getlist;
 
 import an.awesome.pipelinr.Command;
 import java.util.List;

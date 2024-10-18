@@ -14,6 +14,7 @@ import picocli.CommandLine.Command;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.SubmissionPublisher;
 
 @Command(name = "generate-crud", description = "Generate CRUD operations")
@@ -38,14 +39,10 @@ public class GenerateCrudCliCommand implements Runnable {
 
             Path entityPath = Paths.get(settings.getProjectPath(), "domain", "entities", settings.getEntityName() + ".java");
             List<PropertyInfo> entityProperties = JavaCodeReader.readClassPropertiesAsync(entityPath.toString(), settings.getProjectPath()).get();
-            List<String> genericArguments = JavaCodeReader.readBaseClassGenericArgumentsAsync(entityPath.toString()).get();
-
-            if (genericArguments.isEmpty()) {
-                // Handle the case where no generic arguments are found
-                System.out.println("No generic arguments found, defaulting to Long.");
-                genericArguments = List.of("Long");
-            }
-            String entityIdType = genericArguments.get(0);
+            Optional<PropertyInfo> idProperty = entityProperties.stream()
+                    .filter(property -> property.getName().equals("id")) // ID alanı ismi
+                    .findFirst();
+            String entityIdType = idProperty.map(PropertyInfo::getType).orElse("Long");
 
             GenerateCrudCommand generateCrudCommand = new GenerateCrudCommand(
                     settings.getProjectPath(),

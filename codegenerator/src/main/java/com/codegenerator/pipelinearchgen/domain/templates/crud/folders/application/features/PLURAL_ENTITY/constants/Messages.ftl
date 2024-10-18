@@ -1,5 +1,5 @@
 <#-- Template for a Constants class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.constants;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.constants;
 
 public class Messages {
     public static class BusinessErrors {

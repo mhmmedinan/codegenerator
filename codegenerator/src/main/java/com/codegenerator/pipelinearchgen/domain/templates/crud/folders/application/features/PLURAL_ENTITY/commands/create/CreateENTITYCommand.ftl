@@ -1,5 +1,5 @@
 <#-- Template for a Create Command class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.create;
+package com.${ projectName?lower_case }.application.features.${string("camelcase", pluralEntityName)}.commands.create;
 
 import an.awesome.pipelinr.Command;
 import jakarta.persistence.Column;

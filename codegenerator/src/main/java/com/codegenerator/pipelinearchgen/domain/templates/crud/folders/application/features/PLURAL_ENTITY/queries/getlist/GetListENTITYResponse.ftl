@@ -1,5 +1,5 @@
 <#-- Template for a Get List Query Response class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.queries.getlist;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getlist;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

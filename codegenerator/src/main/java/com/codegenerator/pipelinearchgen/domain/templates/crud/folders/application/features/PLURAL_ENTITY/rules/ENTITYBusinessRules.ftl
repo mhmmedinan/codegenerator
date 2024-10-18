@@ -1,5 +1,5 @@
 <#-- Template for Business Rules class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.rules;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.rules;
 
 import lombok.*;
 import org.springframework.stereotype.Service;

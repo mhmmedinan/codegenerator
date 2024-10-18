@@ -1,9 +1,9 @@
 <#-- Template for a Create Command Handler class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.create;
+package com.${ projectName?lower_case }.application.features.${string("camelcase", pluralEntityName)}.commands.create;
 
 import an.awesome.pipelinr.Command;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.mappers.${entity.name?cap_first}Mapper;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.rules.${entity.name?cap_first}BusinessRules;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.mappers.${entity.name?cap_first}Mapper;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.rules.${entity.name?cap_first}BusinessRules;
 import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import org.springframework.stereotype.Component;

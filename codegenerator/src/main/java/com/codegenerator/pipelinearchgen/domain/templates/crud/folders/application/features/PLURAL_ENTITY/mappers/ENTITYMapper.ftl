@@ -1,10 +1,10 @@
 <#-- Template for a Mapper interface -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.mappers;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.mappers;
 
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.create.Create${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.create.Created${entity.name?cap_first}Response;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.delete.Deleted${entity.name?cap_first}Response;
-import com.${projectName?lower_case}.application.features.${pluralEntityName}.queries.getList.GetList${entity.name?cap_first}Response;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.create.Create${entity.name?cap_first}Command;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.create.Created${entity.name?cap_first}Response;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete.Deleted${entity.name?cap_first}Response;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getList.GetList${entity.name?cap_first}Response;
 import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

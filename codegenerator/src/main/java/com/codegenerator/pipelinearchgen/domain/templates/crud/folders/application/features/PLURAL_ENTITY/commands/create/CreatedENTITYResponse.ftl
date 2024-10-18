@@ -1,4 +1,4 @@
-package com.${ projectName?lower_case }.application.features.${ pluralEntityName}.commands.create;
+package com.${ projectName?lower_case }.application.features.${string("camelcase",pluralEntityName)}.commands.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

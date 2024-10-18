@@ -1,5 +1,5 @@
 <#-- Template for a Delete Command Handler class -->
-package com.${projectName?lower_case}.application.features.${pluralEntityName}.commands.delete;
+package com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete;
 
 import an.awesome.pipelinr.Command;
 import com.${projectName?lower_case}.application.features.${pluralEntityName}.mappers.${entity.name?cap_first}Mapper;
