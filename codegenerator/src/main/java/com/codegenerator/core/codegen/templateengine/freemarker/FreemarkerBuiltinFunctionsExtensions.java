@@ -31,9 +31,35 @@ public class FreemarkerBuiltinFunctionsExtensions {
                     return new SimpleScalar(StringUtils.toAbbreviation(input));
                 case "words":
                     return new SimpleScalar(String.join(" ", StringUtils.getWords(input)));
+                case "toWrapperType":
+                    return new SimpleScalar(toWrapperType(input));
                 default:
                     throw new TemplateModelException("Unknown function: " + functionName);
             }
+
+        }
+    }
+
+    private static String toWrapperType(String inputType) {
+        switch (inputType) {
+            case "int":
+                return "Integer";
+            case "float":
+                return "Float";
+            case "double":
+                return "Double";
+            case "char":
+                return "Character";
+            case "boolean":
+                return "Boolean";
+            case "long":
+                return "Long";
+            case "short":
+                return "Short";
+            case "byte":
+                return "Byte";
+            default:
+                return inputType;
         }
     }
 }

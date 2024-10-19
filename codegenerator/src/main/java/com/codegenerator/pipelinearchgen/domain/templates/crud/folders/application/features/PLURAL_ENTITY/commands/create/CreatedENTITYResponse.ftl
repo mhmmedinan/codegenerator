@@ -13,9 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Created${entity.name}Response {
 
-      private ${entity.idType} id;
-
       <#list entity.properties as propertyItem>
-      private ${propertyItem.type} ${propertyItem.name?camel_case};
+      private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
       </#list>
 }

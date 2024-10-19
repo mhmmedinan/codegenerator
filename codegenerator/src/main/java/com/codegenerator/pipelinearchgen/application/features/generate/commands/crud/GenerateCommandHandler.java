@@ -80,6 +80,7 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
             replacePathVariable.put("PLURAL_ENTITY", StringUtils.toCamelCase(crudTemplateData.getEntity().getName())+ "s");
             replacePathVariable.put("ENTITY",StringUtils.toPascalCase(crudTemplateData.getEntity().getName()));
             replacePathVariable.put("projectName", crudTemplateData.getProjectName());
+            replacePathVariable.put("PLURAL_CONTROLLER",StringUtils.toPascalCase(crudTemplateData.getEntity().getName())+"s");
 
 
             try {

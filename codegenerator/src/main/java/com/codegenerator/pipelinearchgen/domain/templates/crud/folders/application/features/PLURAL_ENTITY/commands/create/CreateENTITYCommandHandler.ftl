@@ -22,7 +22,7 @@ public class Create${entity.name?cap_first}CommandHandler implements Command.Han
     @Override
     public Created${entity.name?cap_first}Response handle(Create${entity.name?cap_first}Command create${entity.name?cap_first}Command) {
         ${entity.name?cap_first} ${entity.name?lower_case} = ${entity.name?cap_first}Mapper.INSTANCE
-                .${entity.name?camel_case}FromCreate${entity.name?cap_first}Command(create${entity.name?cap_first}Command);
+                .${string("camelcase",entity.name)}FromCreate${entity.name?cap_first}Command(create${entity.name?cap_first}Command);
         ${entity.name?cap_first} created${entity.name?cap_first} = ${entity.name?lower_case}Repository.save(${entity.name?lower_case});
         return ${entity.name?cap_first}Mapper.INSTANCE.created${entity.name?cap_first}ResponseFrom${entity.name?cap_first}(created${entity.name?lower_case});
     }

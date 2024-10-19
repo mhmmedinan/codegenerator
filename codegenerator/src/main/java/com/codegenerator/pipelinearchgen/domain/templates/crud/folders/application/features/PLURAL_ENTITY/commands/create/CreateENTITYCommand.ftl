@@ -14,6 +14,6 @@ import java.time.LocalDate;
 public class Create${entity.name?cap_first}Command implements Command<Created${entity.name?cap_first}Response> {
 
     <#list entity.properties as propertyItem>
-    private ${propertyItem.type} ${propertyItem.name?camel_case};
+    private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
     </#list>
 }

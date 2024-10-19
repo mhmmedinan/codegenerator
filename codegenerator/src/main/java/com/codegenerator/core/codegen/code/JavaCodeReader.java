@@ -75,20 +75,9 @@ public class JavaCodeReader {
                 List<PropertyInfo> properties = new ArrayList<>();
 
                 while (matcher.find()) {
-                    System.out.println("Match found:");
-                    for (int i = 1; i <= matcher.groupCount(); i++) {
-                        System.out.println("Group " + i + ": " + matcher.group(i));
-                    }
-
                     String accessModifier = matcher.group(1) != null ? matcher.group(1).trim() : "private";
-                    System.out.println("ACCESS: " + accessModifier);
-
                     String type = matcher.group(3);
-                    System.out.println("TYPE: " + type);
-
                     String name = matcher.group(4);
-                    System.out.println("NAME: " + name);
-
                     String typeName = type.replace("?", "");
                     String nameSpace = null;
 

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ${entity.name?cap_first}BusinessRules {
-    private final ${entity.name?cap_first}Repository ${entity.name?camel_case}Repository;
+    private final ${entity.name?cap_first}Repository ${string("camelcase", entity.name)}Repository;
 
     public void ${entity.name?cap_first}IdShouldExistWhenSelected(${entity.idType} id) {
-        ${entity.name?cap_first} ${entity.name?camel_case} = ${entity.name?camel_case}Repository.findById(id).orElseThrow(() ->
+        ${entity.name?cap_first} ${string("camelcase", entity.name)} = ${string("camelcase", entity.name)}Repository.findById(id).orElseThrow(() ->
             new BusinessException(Messages.BusinessErrors.${entity.name?cap_first}NotExists));
     }
 }

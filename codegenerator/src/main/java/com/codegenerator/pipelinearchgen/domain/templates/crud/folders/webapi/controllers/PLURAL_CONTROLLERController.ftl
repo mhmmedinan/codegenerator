@@ -11,11 +11,11 @@ import an.awesome.pipelinr.Pipeline;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/${entity.name?camel_case?plural}")
-public class ${entity.name?cap_first?plural}Controller {
+@RequestMapping("/api/${string("camelcase", entity.name)}s")
+public class ${entity.name?cap_first}Controller {
     private final Pipeline pipeline;
 
-    public ${entity.name?cap_first?plural}Controller(Pipeline pipeline) {
+    public ${entity.name?cap_first}Controller(Pipeline pipeline) {
         this.pipeline = pipeline;
     }
 
