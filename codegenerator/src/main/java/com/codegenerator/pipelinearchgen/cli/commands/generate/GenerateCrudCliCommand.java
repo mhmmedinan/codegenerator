@@ -40,7 +40,7 @@ public class GenerateCrudCliCommand implements Runnable {
             Path entityPath = Paths.get(settings.getProjectPath(), "domain", "entities", settings.getEntityName() + ".java");
             List<PropertyInfo> entityProperties = JavaCodeReader.readClassPropertiesAsync(entityPath.toString(), settings.getProjectPath()).get();
             Optional<PropertyInfo> idProperty = entityProperties.stream()
-                    .filter(property -> property.getName().equals("id")) // ID alanı ismi
+                    .filter(property -> property.getName().equals("id"))
                     .findFirst();
             String entityIdType = idProperty.map(PropertyInfo::getType).orElse("Long");
 

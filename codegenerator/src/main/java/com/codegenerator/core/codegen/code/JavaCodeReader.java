@@ -46,11 +46,9 @@ public class JavaCodeReader {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-                // Updated regex to capture class-level generic types
                 String pattern = "class\\s+\\w+\\s*(?:<([\\w,\\s]+)>)?";
                 Matcher match = Pattern.compile(pattern).matcher(fileContent);
 
-                // Check if pattern is matched and group(1) is not null
                 if (!match.find() || match.group(1) == null) {
                     return List.of();
                 }
@@ -70,16 +68,28 @@ public class JavaCodeReader {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-                Pattern propertyPattern = Pattern.compile("(public|protected|private protected|private)?\\s+(static)?\\s*((\\w+\\.?)+\\??)\\s+(\\w+)\\s*\\{.*\\}");
+
+                Pattern propertyPattern = Pattern.compile("(private|protected|public)\\s+(static\\s+)?(\\w+)\\s+(\\w+);");
                 Pattern builtInTypePattern = Pattern.compile("^(boolean|byte|char|double|float|int|long|object|short|String)$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = propertyPattern.matcher(fileContent);
                 List<PropertyInfo> properties = new ArrayList<>();
 
                 while (matcher.find()) {
+                    System.out.println("Match found:");
+                    for (int i = 1; i <= matcher.groupCount(); i++) {
+                        System.out.println("Group " + i + ": " + matcher.group(i));
+                    }
+
                     String accessModifier = matcher.group(1) != null ? matcher.group(1).trim() : "private";
+                    System.out.println("ACCESS: " + accessModifier);
+
                     String type = matcher.group(3);
+                    System.out.println("TYPE: " + type);
+
+                    String name = matcher.group(4);
+                    System.out.println("NAME: " + name);
+
                     String typeName = type.replace("?", "");
-                    String name = matcher.group(5);
                     String nameSpace = null;
 
                     if (!builtInTypePattern.matcher(typeName).matches()) {
@@ -103,6 +113,7 @@ public class JavaCodeReader {
                     PropertyInfo propertyInfo = new PropertyInfo(name, type, accessModifier, nameSpace);
                     properties.add(propertyInfo);
                 }
+
                 return properties;
             } catch (IOException e) {
                 e.printStackTrace();
