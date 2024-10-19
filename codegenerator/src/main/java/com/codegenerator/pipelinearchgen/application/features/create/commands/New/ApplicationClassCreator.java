@@ -1,5 +1,8 @@
 package com.codegenerator.pipelinearchgen.application.features.create.commands.New;
 
+import com.codegenerator.core.application.constants.DirectoryPath;
+import com.codegenerator.core.codegen.code.StringUtils;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +10,7 @@ import java.nio.file.Path;
 
 public class ApplicationClassCreator {
     public static void createApplicationClass(Path basePath, String projectName) {
-        Path applicationPath = basePath.resolve("src/main/java/com/" + projectName.toLowerCase() + "/" + projectName + "Application.java");
+        Path applicationPath = basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase() + "/" + StringUtils.toPascalCase(projectName) + "Application.java");
         String applicationContent = """
                 package com.%s;
 
@@ -21,7 +24,7 @@ public class ApplicationClassCreator {
                         SpringApplication.run(%sApplication.class, args);
                     }
                 }
-                """.formatted(projectName.toLowerCase(), projectName, projectName);
+                """.formatted(projectName.toLowerCase(), StringUtils.toPascalCase(projectName), StringUtils.toPascalCase(projectName));
 
         try (BufferedWriter writer = Files.newBufferedWriter(applicationPath)) {
             writer.write(applicationContent);
@@ -31,4 +34,3 @@ public class ApplicationClassCreator {
         }
     }
 }
-

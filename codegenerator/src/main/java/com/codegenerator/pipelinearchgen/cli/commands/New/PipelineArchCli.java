@@ -5,7 +5,7 @@ import picocli.CommandLine;
 
 @CommandLine.Command(name = "pipelinearch", mixinStandardHelpOptions = true, version = "1.0",
         description = "PipelineArch CLI for generating Spring Boot projects.",
-        subcommands = {NewProjectCommand.class, GenerateCrudCliCommand.class, CommandLine.HelpCommand.class})
+        subcommands = {NewProjectCliCommand.class, GenerateCrudCliCommand.class, CommandLine.HelpCommand.class})
 public class PipelineArchCli implements Runnable {
 
     @CommandLine.Spec

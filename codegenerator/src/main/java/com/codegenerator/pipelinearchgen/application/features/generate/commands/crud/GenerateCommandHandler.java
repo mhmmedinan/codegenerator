@@ -32,6 +32,7 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
 
             newFilePaths.addAll(generateWebAPICodes(request.getProjectPath(), request.getCrudTemplateData()));
             response.setLastOperationMessage("WebAPI layer codes have been generated.");
+            this.submit(response);
             response.setCurrentStatusMessage("Completed.");
             response.setNewFilePathsResult(newFilePaths);
             response.setUpdatedFilePathsResult(updatedFilePaths);
@@ -42,14 +43,15 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
         }
     }
 
-        private Collection<String> generatePersistenceCodes(String projectPath, CrudTemplateData crudTemplateData){
+        private Collection<String> generatePersistenceCodes(String projectPath, CrudTemplateData crudTemplateData)
+        {
             String templateDir = PlatformHelper.securedPathJoin(
                     DirectoryHelper.getAssemblyDirectory(),
-                     Templates.Paths.CRUD, "folders", "persistence"
+                    Templates.Paths.CRUD, "folders", "persistence"
             );
-        return generateFolderCodes(templateDir,PlatformHelper.securedPathJoin(projectPath,"persistence"),crudTemplateData);
+            return generateFolderCodes(templateDir, PlatformHelper.securedPathJoin(projectPath, "persistence"), crudTemplateData);
 
-    }
+        }
 
     private Collection<String> generateApplicationCodes(String projectPath, CrudTemplateData crudTemplateData){
         String templateDir = PlatformHelper.securedPathJoin(
@@ -70,11 +72,8 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
     }
 
 
-
     public Collection<String> generateFolderCodes(String templateDir, String outputDir, CrudTemplateData crudTemplateData) {
             List<String> templateFilePaths = DirectoryHelper.getFilesInDirectoryTree(templateDir, "*." + templateEngine.getTemplateExtension());
-
-
 
             Map<String, String> replacePathVariable = new HashMap<>();
             replacePathVariable.put("PLURAL_ENTITY", StringUtils.toCamelCase(crudTemplateData.getEntity().getName())+ "s");

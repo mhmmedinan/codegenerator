@@ -1,6 +1,7 @@
 package com.codegenerator.core.codegen.templateengine;
 
 import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
+import com.codegenerator.pipelinearchgen.domain.valueobjects.NewProjectData;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ public interface TemplateEngine {
     String getTemplateExtension();
 
     CompletableFuture<String> renderAsync(String template, CrudTemplateData templateData);
-
 
     CompletableFuture<String> renderFileAsync(
             String templateFilePath,
@@ -30,6 +30,7 @@ public interface TemplateEngine {
             String outputDir,
             CrudTemplateData templateData
     );
+
 }
 
 

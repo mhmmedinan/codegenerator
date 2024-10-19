@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/${string("camelcase", entity.name)}s")
-public class ${entity.name?cap_first}Controller {
+public class ${entity.name?cap_first}sController {
     private final Pipeline pipeline;
 
-    public ${entity.name?cap_first}Controller(Pipeline pipeline) {
+    public ${entity.name?cap_first}sController(Pipeline pipeline) {
         this.pipeline = pipeline;
     }
 

@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
+import com.codegenerator.pipelinearchgen.domain.valueobjects.NewProjectData;
 import freemarker.template.*;
 import org.springframework.stereotype.Service;
 import java.io.StringWriter;
