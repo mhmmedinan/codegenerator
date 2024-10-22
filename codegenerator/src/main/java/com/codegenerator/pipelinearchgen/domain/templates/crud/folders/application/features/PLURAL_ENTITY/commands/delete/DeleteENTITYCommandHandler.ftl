@@ -7,7 +7,7 @@ import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
-import io.github.minan65.core_crosscuttingconcerns.exceptions.types.BusinessException;
+import io.github.mhmmedinan.core_crosscuttingconcerns.exceptions.types.BusinessException;
 
 @Component
 public class Delete${entity.name?cap_first}CommandHandler implements Command.Handler<Delete${entity.name?cap_first}Command, Deleted${entity.name?cap_first}Response> {

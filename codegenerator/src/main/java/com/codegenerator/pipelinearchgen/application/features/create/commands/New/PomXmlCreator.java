@@ -31,19 +31,19 @@ public class PomXmlCreator {
 
                 <dependencies>
                     <dependency>
-                        <groupId>io.github.minan65</groupId>
+                        <groupId>io.github.mhmmedinan-core</groupId>
                         <artifactId>core-persistence</artifactId>
-                        <version>1.0.2</version>
+                        <version>1.0.3</version>
                     </dependency>
                     <dependency>
-                        <groupId>io.github.minan65</groupId>
+                        <groupId>io.github.mhmmedinan-core</groupId>
                         <artifactId>core-crosscuttingconcerns</artifactId>
-                        <version>1.0.2</version>
+                        <version>1.0.4</version>
                     </dependency>
                     <dependency>
-                        <groupId>io.github.minan65</groupId>
+                        <groupId>io.github.mhmmedinan-core</groupId>
                         <artifactId>core-localization</artifactId>
-                        <version>1.0.2</version>                
+                        <version>1.0.5</version>                
                     </dependency>
                     <dependency>
                        <groupId>org.projectlombok</groupId>

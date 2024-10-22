@@ -3,7 +3,7 @@ package com.${projectName?lower_case}.application.services.${string("camelcase",
 import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import org.springframework.stereotype.Service;
-import io.github.minan65.core_crosscuttingconcerns.exceptions.types.BusinessException;
+import io.github.mhmmedinan.core_crosscuttingconcerns.exceptions.types.BusinessException;
 import java.util.List;
 import lombok.*;
 import java.time.LocalDateTime;
