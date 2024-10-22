@@ -6,6 +6,7 @@ import com.${projectName?lower_case}.application.features.${string("camelcase", 
 import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import org.springframework.stereotype.Component;
+import io.github.minan65.core_crosscuttingconcerns.exceptions.types.BusinessException;
 
 @Component
 public class Update${entity.name?cap_first}CommandHandler implements Command.Handler<Update${entity.name?cap_first}Command, Updated${entity.name?cap_first}Response> {
@@ -17,8 +18,8 @@ public class Update${entity.name?cap_first}CommandHandler implements Command.Han
 
     @Override
     public Updated${entity.name?cap_first}Response handle(Update${entity.name?cap_first}Command update${entity.name?cap_first}Command) {
-        ${entity.name?cap_first} existingEntity = ${entity.name?lower_case}Repository.findById(update${entity.name?cap_first}Command.getId()).orElseThrow(() -> new RuntimeException("Entity not found"));
-        ${entity.name?cap_first} updatedEntity = ${entity.name?lower_case}Repository.save(existingEntity);
-        return ${entity.name?cap_first}Mapper.INSTANCE.updated${entity.name?cap_first}ResponseFrom${entity.name?cap_first}(updatedEntity);
+        ${entity.name?cap_first} existing${entity.name?cap_first} = ${entity.name?lower_case}Repository.findById(update${entity.name?cap_first}Command.getId()).orElseThrow(() -> new BusinessException("${entity.name?cap_first} not found"));
+        ${entity.name?cap_first} updated${entity.name?cap_first} = ${entity.name?lower_case}Repository.save(existing${entity.name?cap_first});
+        return ${entity.name?cap_first}Mapper.INSTANCE.updated${entity.name?cap_first}ResponseFrom${entity.name?cap_first}(updated${entity.name?cap_first});
     }
 }
