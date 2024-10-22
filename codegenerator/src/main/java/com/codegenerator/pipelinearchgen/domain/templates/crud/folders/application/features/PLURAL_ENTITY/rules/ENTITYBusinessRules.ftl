@@ -4,7 +4,6 @@ package com.${projectName?lower_case}.application.features.${string("camelcase",
 import lombok.*;
 import org.springframework.stereotype.Service;
 import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.constants.Messages;
-import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import io.github.mhmmedinan.core_crosscuttingconcerns.exceptions.types.BusinessException;
 import io.github.mhmmedinan.core_localization.abstraction.TranslationService;
