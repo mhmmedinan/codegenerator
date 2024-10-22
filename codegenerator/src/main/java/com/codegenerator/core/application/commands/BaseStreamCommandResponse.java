@@ -1,5 +1,10 @@
 package com.codegenerator.core.application.commands;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class BaseStreamCommandResponse {
 
     private String currentStatusMessage;
@@ -8,29 +13,5 @@ public abstract class BaseStreamCommandResponse {
 
     protected BaseStreamCommandResponse() {
         this.currentStatusMessage = "";
-    }
-
-    public String getCurrentStatusMessage() {
-        return currentStatusMessage;
-    }
-
-    public void setCurrentStatusMessage(String currentStatusMessage) {
-        this.currentStatusMessage = currentStatusMessage;
-    }
-
-    public String getOutputMessage() {
-        return outputMessage;
-    }
-
-    public void setOutputMessage(String outputMessage) {
-        this.outputMessage = outputMessage;
-    }
-
-    public String getLastOperationMessage() {
-        return lastOperationMessage;
-    }
-
-    public void setLastOperationMessage(String lastOperationMessage) {
-        this.lastOperationMessage = lastOperationMessage;
     }
 }

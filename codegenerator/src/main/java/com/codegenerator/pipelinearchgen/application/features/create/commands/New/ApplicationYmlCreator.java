@@ -35,9 +35,9 @@ public class ApplicationYmlCreator {
 
         try (BufferedWriter writer = Files.newBufferedWriter(propertiesPath)) {
             writer.write(propertiesContent);
-            System.out.println("Created application.properties: " + propertiesPath);
+            System.out.println("Created application.yml: " + propertiesPath);
         } catch (IOException e) {
-            System.err.println("Failed to create application.properties: " + e.getMessage());
+            System.err.println("Failed to create application.yml: " + e.getMessage());
         }
     }
 }

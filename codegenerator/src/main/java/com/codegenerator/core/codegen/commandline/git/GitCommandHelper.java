@@ -6,22 +6,22 @@ public class GitCommandHelper {
     public static ProcessBuilder getGitProcess() {
         ProcessBuilder processBuilder = new ProcessBuilder("git");
         processBuilder.directory(new java.io.File(System.getProperty("user.dir")));
-        processBuilder.redirectErrorStream(true); // Hata akışını standart çıktıya yönlendir
+        processBuilder.redirectErrorStream(true);
         return processBuilder;
     }
 
     public static void runAsync(String arguments) throws IOException, InterruptedException {
         ProcessBuilder processBuilder = getGitProcess();
-        processBuilder.command(arguments.split(" ")); // Argümanları ayırarak ekle
+        processBuilder.command(arguments.split(" "));
         Process process = processBuilder.start();
-        process.waitFor(); // Sürecin tamamlanmasını bekle
+        process.waitFor();
     }
 
     public static void commitChangesAsync(String message) throws IOException, InterruptedException {
         ProcessBuilder addCommand = getGitProcess();
-        addCommand.command("add", "."); // Tüm değişiklikleri ekle
+        addCommand.command("add", ".");
         Process addProcess = addCommand.start();
-        addProcess.waitFor(); // Ekleme işleminin tamamlanmasını bekle
+        addProcess.waitFor();
 
         runAsync("commit -m \"" + message + "\"");
     }

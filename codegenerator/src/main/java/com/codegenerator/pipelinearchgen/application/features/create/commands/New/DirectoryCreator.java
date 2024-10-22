@@ -38,6 +38,7 @@ public class DirectoryCreator {
             ApplicationClassCreator.createApplicationClass(basePath,projectName);
             ApplicationYmlCreator.createApplicationProperties(basePath,projectName);
             PomXmlCreator.createPomXml(basePath,projectName);
+            MessagesPropertiesCreator.create(basePath);
 
 
         } catch (Exception e) {

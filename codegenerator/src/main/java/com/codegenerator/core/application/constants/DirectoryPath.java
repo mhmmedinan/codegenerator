@@ -18,6 +18,9 @@ public class DirectoryPath {
         public static final String INFRASTRUCTURE_ADAPTERS_PATH = BASE_INFRASTRUCTURE_PATH + "/adapters";
         public static final String WEBAPI_CONTROLLER_PATH = BASE_WEBAPI_PATH + "/controllers";
         public static final String RESOURCES_YML_PATH = RESOURCES_PATH + "/application.yml";
+        public static final String RESOURCES_MESSAGES_PROPERTIES_PATH = RESOURCES_PATH + "/messages.properties";
+        public static final String RESOURCES_MESSAGES_PROPERTIES_TR_PATH = RESOURCES_PATH + "/messages_tr.properties";
+        public static final String RESOURCES_MESSAGES_PROPERTIES_EN_PATH = RESOURCES_PATH + "/messages_en.properties";
 
 
     }

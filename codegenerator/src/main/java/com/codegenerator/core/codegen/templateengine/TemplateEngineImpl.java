@@ -23,10 +23,6 @@ public class TemplateEngineImpl implements TemplateEngine {
         return templateRenderer.getTemplateExtension();
     }
 
-    @Override
-    public CompletableFuture<String> renderAsync(String template, CrudTemplateData templateData) {
-        return templateRenderer.renderAsync(template, templateData);
-    }
 
 
     @Override

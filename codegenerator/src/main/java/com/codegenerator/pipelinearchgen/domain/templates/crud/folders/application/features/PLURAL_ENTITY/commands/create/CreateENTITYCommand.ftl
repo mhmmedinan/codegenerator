@@ -2,9 +2,7 @@
 package com.${ projectName?lower_case }.application.features.${string("camelcase", pluralEntityName)}.commands.create;
 
 import an.awesome.pipelinr.Command;
-import jakarta.persistence.Column;
 import lombok.*;
-import java.time.LocalDate;
 
 @Getter
 @Setter

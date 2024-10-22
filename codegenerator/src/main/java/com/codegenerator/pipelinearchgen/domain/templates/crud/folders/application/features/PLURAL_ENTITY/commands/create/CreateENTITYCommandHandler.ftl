@@ -24,6 +24,6 @@ public class Create${entity.name?cap_first}CommandHandler implements Command.Han
         ${entity.name?cap_first} ${entity.name?lower_case} = ${entity.name?cap_first}Mapper.INSTANCE
                 .${string("camelcase",entity.name)}FromCreate${entity.name?cap_first}Command(create${entity.name?cap_first}Command);
         ${entity.name?cap_first} created${entity.name?cap_first} = ${entity.name?lower_case}Repository.save(${entity.name?lower_case});
-        return ${entity.name?cap_first}Mapper.INSTANCE.created${entity.name?cap_first}ResponseFrom${entity.name?cap_first}(created${entity.name?lower_case});
+        return ${entity.name?cap_first}Mapper.INSTANCE.created${entity.name?cap_first}ResponseFrom${entity.name?cap_first}(created${entity.name?cap_first});
     }
 }

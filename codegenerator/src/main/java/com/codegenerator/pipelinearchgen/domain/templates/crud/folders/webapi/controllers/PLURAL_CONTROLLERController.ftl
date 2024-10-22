@@ -1,10 +1,10 @@
 <#-- Template for a Controller class -->
 package com.${projectName?lower_case}.webapi.controllers;
 
-import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.create.Create${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete.Delete${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.update.Update${entity.name?cap_first}Command;
-import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getlist.GetList${entity.name?cap_first}Query;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.create.*;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.delete.*;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.commands.update.*;
+import com.${projectName?lower_case}.application.features.${string("camelcase", pluralEntityName)}.queries.getlist.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import an.awesome.pipelinr.Pipeline;
@@ -32,16 +32,16 @@ public class ${entity.name?cap_first}sController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable ${entity.idType} id) {
         Delete${entity.name?cap_first}Command command = new Delete${entity.name?cap_first}Command(id);
         command.execute(pipeline);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<${entity.name?cap_first}Response>> getAll() {
+    public ResponseEntity<List<GetList${entity.name?cap_first}Response>> getAll() {
         GetList${entity.name?cap_first}Query query = new GetList${entity.name?cap_first}Query();
-        List<${entity.name?cap_first}Response> responses = query.execute(pipeline);
+        List<GetList${entity.name?cap_first}Response> responses = query.execute(pipeline);
         return ResponseEntity.ok(responses);
     }
 }

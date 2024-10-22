@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetList${entity.name?cap_first}Response {
-    private ${entity.idType} id;
 
     <#list entity.properties as propertyItem>
     private ${propertyItem.type} ${string("camelcase", propertyItem.name)};

@@ -12,8 +12,6 @@ public interface TemplateEngine {
 
     String getTemplateExtension();
 
-    CompletableFuture<String> renderAsync(String template, CrudTemplateData templateData);
-
     CompletableFuture<String> renderFileAsync(
             String templateFilePath,
             String templateDir,

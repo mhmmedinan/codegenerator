@@ -36,7 +36,6 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
             response.setCurrentStatusMessage("Completed.");
             response.setNewFilePathsResult(newFilePaths);
             response.setUpdatedFilePathsResult(updatedFilePaths);
-            this.submit(response);
             this.close();
         } catch (Exception e) {
             this.closeExceptionally(e);

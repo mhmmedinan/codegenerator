@@ -1,6 +1,5 @@
 package com.codegenerator.pipelinearchgen.application.features.create.commands.New;
 
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -23,12 +22,54 @@ public class PomXmlCreator {
                 <packaging>jar</packaging>
 
                 <properties>
-                     <maven.compiler.source>19</maven.compiler.source>
-                     <maven.compiler.target>19</maven.compiler.target>
+                     <spring-cloud.version>2023.0.2</spring-cloud.version>
+                     <org.mapstruct.version>1.6.0.Beta1</org.mapstruct.version>
+                     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+                     <org.projectlombok.version>1.18.30</org.projectlombok.version>
                      <java.version>19</java.version> <!-- Java 19 ayarlandı -->
                 </properties>
 
                 <dependencies>
+                    <dependency>
+                        <groupId>io.github.minan65</groupId>
+                        <artifactId>core-persistence</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.github.minan65</groupId>
+                        <artifactId>core-crosscuttingconcerns</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.github.minan65</groupId>
+                        <artifactId>core-localization</artifactId>
+                        <version>1.0.2</version>                
+                    </dependency>
+                    <dependency>
+                       <groupId>org.projectlombok</groupId>
+                       <artifactId>lombok</artifactId>
+                       <optional>true</optional>
+                    </dependency>
+                    <dependency>
+                       <groupId>org.postgresql</groupId>
+                       <artifactId>postgresql</artifactId>
+                       <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springdoc</groupId>
+                        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                        <version>2.3.0</version>
+                    </dependency>
+                    <dependency>
+                       <groupId>net.sizovs</groupId>
+                       <artifactId>pipelinr</artifactId>
+                       <version>0.8</version>
+                    </dependency>
+                    <dependency>
+                       <groupId>org.mapstruct</groupId>
+                       <artifactId>mapstruct</artifactId>
+                       <version>${org.mapstruct.version}</version>
+                    </dependency>
                     <dependency>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter</artifactId>
@@ -57,20 +98,50 @@ public class PomXmlCreator {
                         <scope>test</scope>
                     </dependency>
                 </dependencies>
+                <dependencyManagement>
+                       <dependencies>
+                    	   <dependency>
+                    		  <groupId>org.springframework.cloud</groupId>
+                    		  <artifactId>spring-cloud-dependencies</artifactId>
+                    		  <version>${spring-cloud.version}</version>
+                    		  <type>pom</type>
+                    		  <scope>import</scope>
+                    	   </dependency>
+                       </dependencies>
+                </dependencyManagement>
 
-                 <build>
-                    <plugins>
-                       <plugin>
-                         <groupId>org.apache.maven.plugins</groupId>
-                         <artifactId>maven-compiler-plugin</artifactId>
-                         <version>3.8.1</version>
-                         <configuration>
-                           <source>19</source> <!-- Java kaynak sürümü -->
-                           <target>19</target> <!-- Java hedef sürümü -->
-                         </configuration>
-                       </plugin>
-                    </plugins>
-                 </build>
+               <build>
+                   		<pluginManagement>
+                   			<plugins>
+                   				<plugin>
+                   					<groupId>org.apache.maven.plugins</groupId>
+                   					<artifactId>maven-compiler-plugin</artifactId>
+                   					<version>3.8.1</version>
+                   					<configuration>
+                   						<source>${java.version}</source>
+                   						<target>${java.version}</target>
+                   						<annotationProcessorPaths>
+                   							<path>
+                   								<groupId>org.mapstruct</groupId>
+                   								<artifactId>mapstruct-processor</artifactId>
+                   								<version>${org.mapstruct.version}</version>
+                   							</path>
+                   							<path>
+                   								<groupId>org.projectlombok</groupId>
+                   								<artifactId>lombok</artifactId>
+                   								<version>${org.projectlombok.version}</version>
+                   							</path>
+                   							<path>
+                   								<groupId>org.projectlombok</groupId>
+                   								<artifactId>lombok-mapstruct-binding</artifactId>
+                   								<version>${lombok-mapstruct-binding.version}</version>
+                   							</path>
+                   						</annotationProcessorPaths>
+                   					</configuration>
+                   				</plugin>
+                   			</plugins>
+                   		</pluginManagement>
+                   	</build>
             </project>
             """.formatted(basePath.getFileName().toString(), projectName);
 
@@ -82,4 +153,5 @@ public class PomXmlCreator {
             System.err.println("Failed to create pom.xml: " + e.getMessage());
         }
     }
+
 }
