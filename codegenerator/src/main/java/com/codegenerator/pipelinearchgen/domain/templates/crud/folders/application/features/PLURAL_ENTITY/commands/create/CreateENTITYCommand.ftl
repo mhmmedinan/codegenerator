@@ -10,8 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Create${entity.name?cap_first}Command implements Command<Created${entity.name?cap_first}Response> {
-
     <#list entity.properties as propertyItem>
+      <#if propertyItem.name != "id">
     private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
+      </#if>
     </#list>
 }

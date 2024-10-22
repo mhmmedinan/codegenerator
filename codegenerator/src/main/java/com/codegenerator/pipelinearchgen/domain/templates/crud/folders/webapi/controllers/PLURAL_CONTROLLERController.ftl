@@ -32,10 +32,10 @@ public class ${entity.name?cap_first}sController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable ${entity.idType} id) {
+    public ResponseEntity<Deleted${entity.name?cap_first}Response> delete(@PathVariable ${entity.idType} id) {
         Delete${entity.name?cap_first}Command command = new Delete${entity.name?cap_first}Command(id);
-        command.execute(pipeline);
-        return ResponseEntity.noContent().build();
+        Deleted${entity.name?cap_first}Response response = command.execute(pipeline);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
