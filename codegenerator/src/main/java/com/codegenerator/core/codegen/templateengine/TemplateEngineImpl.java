@@ -1,8 +1,10 @@
 package com.codegenerator.core.codegen.templateengine;
 
 import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
+import com.codegenerator.core.application.constants.DirectoryPath;
 import com.codegenerator.core.codegen.file.FileHelper;
 import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
+import com.codegenerator.core.codegen.helpers.PlatformHelper;
 import org.springframework.stereotype.Service;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -89,6 +91,34 @@ public class TemplateEngineImpl implements TemplateEngine {
                 });
     }
 
+    @Override
+    public CompletableFuture<List<String>> renderNewFilesAsync(List<String> templateFilePaths, String templateDir, Map<String, String> replacePathVariable, String outputDir, NewProjectData templateData) {
+        List<CompletableFuture<String>> futures = new ArrayList<>();
+        for (String templateFilePath : templateFilePaths) {
+            String filename = Paths.get(templateFilePath).getFileName().toString();
+            String specificOutputDir = determineOutputDir(outputDir, filename,templateData.getProjectName());
+            futures.add(renderNewFileAsync(templateFilePath, templateDir, replacePathVariable, specificOutputDir, templateData));
+        }
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenApply(v -> {
+                    List<String> renderedFilePaths = new ArrayList<>();
+                    futures.forEach(future -> renderedFilePaths.add(future.join()));
+                    return renderedFilePaths;
+                });
+    }
+
+
+    private String determineOutputDir(String defaultOutputDir, String filename,String projectName) {
+        switch (filename) {
+            case "application.yml.ftl","message.properties.ftl","message_en.properties.ftl","message_tr.properties.ftl":
+                return PlatformHelper.securedPathJoin(defaultOutputDir, DirectoryPath.Paths.RESOURCES_PATH);
+            case "APPLICATION_NAMEApplication.ftl":
+                return PlatformHelper.securedPathJoin(defaultOutputDir, DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase());
+            default:
+                return defaultOutputDir;
+        }
+
+    }
 
 
 

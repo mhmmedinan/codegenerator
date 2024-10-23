@@ -35,6 +35,10 @@ public interface TemplateEngine {
             String outputDir,
             CrudTemplateData templateData
     );
+    CompletableFuture<List<String>> renderNewFilesAsync(
+            List<String> templateFilePaths,
+            String templateDir, Map<String, String> replacePathVariable,
+            String outputDir, NewProjectData templateData);
 
 
 }
