@@ -80,23 +80,9 @@ public class GenerateCrudCliCommandSettings {
         System.out.println("Selected entity is " + entityName);
     }
 
-    private String toCamelCase(String value) {
-        StringBuilder result = new StringBuilder();
-        for (String part : value.split(" ")) {
-            if (part.length() > 0) {
-                result.append(Character.toUpperCase(part.charAt(0)))
-                        .append(part.substring(1).toLowerCase());
-            }
-        }
-        return result.toString();
-    }
 
     private String selectProjectFromPrompt(File[] projects) {
         return projects[0].getName();
-    }
-
-    private String selectEntityFromPrompt(File[] entities) {
-        return entities[0].getName().replace(".java", "");
     }
 }
 

@@ -1,5 +1,6 @@
 package com.codegenerator.core.codegen.templateengine.freemarker;
 
+import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
 import com.codegenerator.core.codegen.templateengine.TemplateRenderer;
 import java.io.IOException;
 import java.io.StringReader;
@@ -39,6 +40,24 @@ public class FreemarkerTemplateRenderer implements TemplateRenderer {
                 templateData.put("projectName", data.getProjectName());
                 templateData.put("pluralEntityName", data.getEntity().getName() + "s");
                 templateData.put("entity",data.getEntity());
+
+                StringWriter writer = new StringWriter();
+                freemarkerTemplate.process(templateData,writer);
+                return writer.toString();
+            } catch (IOException | TemplateException e) {
+                throw new CompletionException(e);
+            }
+        });
+    }
+
+    @Override
+    public CompletableFuture<String> renderNewAsync(String template, NewProjectData data) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Template freemarkerTemplate = new Template("template", new StringReader(template), configuration);
+
+                Map<String, Object> templateData = new HashMap<>();
+                templateData.put("projectName", data.getProjectName());
 
                 StringWriter writer = new StringWriter();
                 freemarkerTemplate.process(templateData,writer);

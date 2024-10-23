@@ -1,6 +1,7 @@
 package com.codegenerator.core.codegen.templateengine;
 
 import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
+import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,13 @@ public interface TemplateEngine {
             String outputDir,
             CrudTemplateData templateData
     );
+    CompletableFuture<String> renderNewFileAsync(
+            String templateFilePath,
+            String templateDir,
+            Map<String, String> replacePathVariable,
+            String outputDir,
+            NewProjectData templateData
+    );
 
 
     CompletableFuture<List<String>> renderFilesAsync(
@@ -27,6 +35,7 @@ public interface TemplateEngine {
             String outputDir,
             CrudTemplateData templateData
     );
+
 
 }
 

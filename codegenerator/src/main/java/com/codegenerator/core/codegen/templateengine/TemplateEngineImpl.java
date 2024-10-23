@@ -1,5 +1,6 @@
 package com.codegenerator.core.codegen.templateengine;
 
+import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
 import com.codegenerator.core.codegen.file.FileHelper;
 import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,25 @@ public class TemplateEngineImpl implements TemplateEngine {
     }
 
     @Override
+    public CompletableFuture<String> renderNewFileAsync(String templateFilePath, String templateDir, Map<String, String> replacePathVariable, String outputDir, NewProjectData templateData) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String templateFileText = Files.readString(Paths.get(templateFilePath));
+                String newRenderedFileText = templateRenderer.renderNewAsync(templateFileText, templateData).get();
+                String newRenderedFilePath = templateRenderer.renderNewAsync(
+                        getOutputNewFilePath(templateFilePath, templateDir, replacePathVariable, outputDir),
+                        templateData
+                ).get();
+
+                FileHelper.createFileAsync(newRenderedFilePath, newRenderedFileText);
+                return newRenderedFilePath;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @Override
     public CompletableFuture<List<String>> renderFilesAsync(
             List<String> templateFilePaths,
             String templateDir,
@@ -69,6 +89,9 @@ public class TemplateEngineImpl implements TemplateEngine {
                 });
     }
 
+
+
+
     private String getOutputFilePath(
             String templateFilePath,
             String templateDir,
@@ -84,6 +107,35 @@ public class TemplateEngineImpl implements TemplateEngine {
         outputFilePath = outputFilePath
                 .replace(templateDir, outputDir)
                 .replace("." + templateRenderer.getTemplateExtension(), ".java");
+
+        return outputFilePath;
+    }
+
+    private String getOutputNewFilePath(
+            String templateFilePath,
+            String templateDir,
+            Map<String, String> replacePathVariable,
+            String outputDir
+    ) {
+        templateDir = templateDir.replace("\\\\", "\\");
+        templateFilePath = templateFilePath.replace("\\\\", "\\");
+        String outputFilePath = templateFilePath;
+        for (Map.Entry<String, String> entry : replacePathVariable.entrySet()) {
+            outputFilePath = outputFilePath.replace(entry.getKey(), entry.getValue());
+        }
+        String templateExtension = templateRenderer.getTemplateExtension();
+        if (templateFilePath.endsWith("pom.xml." + templateExtension)) {
+            outputFilePath = outputFilePath.replace(".xml." + templateExtension, ".xml");
+        } else if (templateFilePath.endsWith("application.yml." + templateExtension)) {
+            outputFilePath = outputFilePath.replace(".yml." + templateExtension, ".yml");
+        }
+        else if (templateFilePath.endsWith(".properties." + templateExtension )) {
+            outputFilePath = outputFilePath.replace(".properties." + templateExtension, ".properties");
+        }
+        else {
+            outputFilePath = outputFilePath.replace("." + templateExtension, ".java");
+        }
+        outputFilePath = outputFilePath.replace(templateDir, outputDir);
 
         return outputFilePath;
     }

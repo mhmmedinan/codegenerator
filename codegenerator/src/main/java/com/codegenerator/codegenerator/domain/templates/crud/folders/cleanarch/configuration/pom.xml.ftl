@@ -1,12 +1,4 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-public class PomXmlCreator {
-    public static void createPomXml(Path basePath, String projectName) {
-        String pomXmlContent = """
-            <project xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <modelVersion>4.0.0</modelVersion>
@@ -16,18 +8,10 @@ public class PomXmlCreator {
                    <version>3.2.6</version>
                    <relativePath/> <!-- lookup parent from repository -->
                 </parent>
-                <groupId>com.%s</groupId>
-                <artifactId>%s</artifactId>
+                <groupId>com.${projectName?lower_case}</groupId>
+                <artifactId>${projectName?lower_case}</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <packaging>jar</packaging>
-
-                <properties>
-                     <spring-cloud.version>2023.0.2</spring-cloud.version>
-                     <org.mapstruct.version>1.6.0.Beta1</org.mapstruct.version>
-                     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-                     <org.projectlombok.version>1.18.30</org.projectlombok.version>
-                     <java.version>19</java.version> <!-- Java 19 ayarlandı -->
-                </properties>
 
                 <dependencies>
                     <dependency>
@@ -43,7 +27,7 @@ public class PomXmlCreator {
                     <dependency>
                         <groupId>io.github.mhmmedinan-core</groupId>
                         <artifactId>core-localization</artifactId>
-                        <version>1.0.5</version>                
+                        <version>1.0.5</version>
                     </dependency>
                     <dependency>
                        <groupId>org.projectlombok</groupId>
@@ -68,7 +52,7 @@ public class PomXmlCreator {
                     <dependency>
                        <groupId>org.mapstruct</groupId>
                        <artifactId>mapstruct</artifactId>
-                       <version>${org.mapstruct.version}</version>
+                       <version>1.6.0.Beta1</version>
                     </dependency>
                     <dependency>
                         <groupId>org.springframework.boot</groupId>
@@ -103,7 +87,7 @@ public class PomXmlCreator {
                     	   <dependency>
                     		  <groupId>org.springframework.cloud</groupId>
                     		  <artifactId>spring-cloud-dependencies</artifactId>
-                    		  <version>${spring-cloud.version}</version>
+                    		  <version>2023.0.2</version>
                     		  <type>pom</type>
                     		  <scope>import</scope>
                     	   </dependency>
@@ -111,47 +95,35 @@ public class PomXmlCreator {
                 </dependencyManagement>
 
                <build>
-                   		<pluginManagement>
+                       <pluginManagement>
                    			<plugins>
                    				<plugin>
                    					<groupId>org.apache.maven.plugins</groupId>
                    					<artifactId>maven-compiler-plugin</artifactId>
                    					<version>3.8.1</version>
                    					<configuration>
-                   						<source>${java.version}</source>
-                   						<target>${java.version}</target>
+                   						<source>19</source>
+                   						<target>19</target>
                    						<annotationProcessorPaths>
                    							<path>
                    								<groupId>org.mapstruct</groupId>
                    								<artifactId>mapstruct-processor</artifactId>
-                   								<version>${org.mapstruct.version}</version>
+                   								<version>1.6.0.Beta1</version>
                    							</path>
                    							<path>
                    								<groupId>org.projectlombok</groupId>
                    								<artifactId>lombok</artifactId>
-                   								<version>${org.projectlombok.version}</version>
+                   								<version>1.18.30</version>
                    							</path>
                    							<path>
                    								<groupId>org.projectlombok</groupId>
                    								<artifactId>lombok-mapstruct-binding</artifactId>
-                   								<version>${lombok-mapstruct-binding.version}</version>
+                   								<version>0.2.0</version>
                    							</path>
                    						</annotationProcessorPaths>
                    					</configuration>
                    				</plugin>
                    			</plugins>
-                   		</pluginManagement>
-                   	</build>
-            </project>
-            """.formatted(basePath.getFileName().toString(), projectName);
-
-        try {
-            Path pomXmlPath = basePath.resolve("pom.xml");
-            Files.writeString(pomXmlPath, pomXmlContent);
-            System.out.println("Created pom.xml at: " + pomXmlPath);
-        } catch (Exception e) {
-            System.err.println("Failed to create pom.xml: " + e.getMessage());
-        }
-    }
-
-}
+                       </pluginManagement>
+               </build>
+</project>

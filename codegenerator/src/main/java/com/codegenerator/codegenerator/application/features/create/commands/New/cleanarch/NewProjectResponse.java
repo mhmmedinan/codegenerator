@@ -1,4 +1,4 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New;
+package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
 
 import com.codegenerator.core.application.commands.BaseStreamCommandResponse;
 import lombok.Getter;

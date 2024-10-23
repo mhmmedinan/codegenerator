@@ -1,4 +1,4 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New;
+package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
 
 import java.util.concurrent.Flow;
 
