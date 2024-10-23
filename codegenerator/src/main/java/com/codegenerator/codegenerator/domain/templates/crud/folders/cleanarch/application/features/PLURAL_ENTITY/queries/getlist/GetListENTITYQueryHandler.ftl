@@ -7,14 +7,12 @@ import com.${projectName?lower_case}.domain.entities.${entity.name?cap_first};
 import com.${projectName?lower_case}.persistence.repositories.${entity.name?cap_first}Repository;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import lombok.*;
 
 @Component
+@RequiredArgsConstructor
 public class GetList${entity.name?cap_first}QueryHandler implements Command.Handler<GetList${entity.name?cap_first}Query, List<GetList${entity.name?cap_first}Response>> {
     private final ${entity.name?cap_first}Repository ${string("camelcase", entity.name)}Repository;
-
-    public GetList${entity.name?cap_first}QueryHandler(${entity.name?cap_first}Repository ${string("camelcase", entity.name)}Repository) {
-        this.${string("camelcase", entity.name)}Repository = ${string("camelcase", entity.name)}Repository;
-    }
 
     @Override
     public List<GetList${entity.name?cap_first}Response> handle(GetList${entity.name?cap_first}Query getList${entity.name?cap_first}Query) {

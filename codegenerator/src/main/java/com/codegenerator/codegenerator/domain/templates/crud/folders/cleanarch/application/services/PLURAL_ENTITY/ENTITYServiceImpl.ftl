@@ -22,16 +22,16 @@ private final ${entity.name?cap_first}Repository ${string("camelcase", entity.na
 
     @Override
     public ${entity.name?cap_first} update(${entity.name?cap_first} ${string("camelcase", entity.name)}) {
-        ${entity.name?cap_first} existing${entity.name?cap_first} = ${entity.name?lower_case}Repository.findById(${string("camelcase", entity.name)}.getId()).orElseThrow(() -> new BusinessException("${entity.name?cap_first} not found"));
-        ${entity.name?cap_first} updated${entity.name?cap_first} = ${entity.name?lower_case}Repository.save(existing${entity.name?cap_first});
+        ${entity.name?cap_first} existing${entity.name?cap_first} = ${string("camelcase", entity.name)}Repository.findById(${string("camelcase", entity.name)}.getId()).orElseThrow(() -> new BusinessException("${entity.name?cap_first} not found"));
+        ${entity.name?cap_first} updated${entity.name?cap_first} = ${string("camelcase", entity.name)}Repository.save(existing${entity.name?cap_first});
         return updated${entity.name?cap_first};
     }
 
     @Override
     public ${entity.name?cap_first} delete(${entity.idType} id) {
-        ${entity.name?cap_first} existing${entity.name?cap_first} = ${entity.name?lower_case}Repository.findById(id).orElseThrow(() -> new BusinessException("${entity.name?cap_first} not found"));
+        ${entity.name?cap_first} existing${entity.name?cap_first} = ${string("camelcase", entity.name)}Repository.findById(id).orElseThrow(() -> new BusinessException("${entity.name?cap_first} not found"));
         existing${entity.name?cap_first}.setDeletedDate(LocalDateTime.now());
-        ${entity.name?cap_first} deleted${entity.name?cap_first} = ${entity.name?lower_case}Repository.save(existing${entity.name?cap_first});
+        ${entity.name?cap_first} deleted${entity.name?cap_first} = ${string("camelcase", entity.name)}Repository.save(existing${entity.name?cap_first});
         return deleted${entity.name?cap_first};
     }
 
