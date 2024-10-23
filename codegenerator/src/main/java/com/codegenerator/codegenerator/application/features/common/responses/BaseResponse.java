@@ -1,4 +1,4 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
+package com.codegenerator.codegenerator.application.features.common.responses;
 
 import com.codegenerator.core.application.commands.BaseStreamCommandResponse;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Getter
 @Setter
-public class NewProjectResponse extends BaseStreamCommandResponse {
+public class BaseResponse extends BaseStreamCommandResponse {
     private Collection<String> newFilePathsResult;
     private Collection<String> updatedFilePathsResult;
 }

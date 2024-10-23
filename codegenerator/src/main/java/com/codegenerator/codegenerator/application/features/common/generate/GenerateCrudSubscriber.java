@@ -1,8 +1,10 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
+package com.codegenerator.codegenerator.application.features.common.generate;
+
+import com.codegenerator.codegenerator.application.features.common.responses.BaseResponse;
 
 import java.util.concurrent.Flow;
 
-public class NewProjectSubscriber implements Flow.Subscriber<NewProjectResponse>{
+public class GenerateCrudSubscriber implements Flow.Subscriber<BaseResponse> {
 
     private Flow.Subscription subscription;
 
@@ -13,8 +15,7 @@ public class NewProjectSubscriber implements Flow.Subscriber<NewProjectResponse>
     }
 
     @Override
-    public void onNext(NewProjectResponse response) {
-
+    public void onNext(BaseResponse response) {
         System.out.println("Current Status: " + response.getCurrentStatusMessage());
 
         if (response.getOutputMessage() != null) {
@@ -24,7 +25,7 @@ public class NewProjectSubscriber implements Flow.Subscriber<NewProjectResponse>
             System.out.println("✔️ " + response.getLastOperationMessage());
         }
         if (response.getNewFilePathsResult() != null) {
-            System.out.println("🆕 Created files:");
+            System.out.println("🆕 Generated files:");
             response.getNewFilePathsResult().forEach(path -> System.out.println(path));
         }
         if (response.getUpdatedFilePathsResult() != null) {
@@ -34,6 +35,7 @@ public class NewProjectSubscriber implements Flow.Subscriber<NewProjectResponse>
 
         subscription.request(1);
     }
+
     @Override
     public void onError(Throwable throwable) {
         throwable.printStackTrace();
@@ -41,6 +43,6 @@ public class NewProjectSubscriber implements Flow.Subscriber<NewProjectResponse>
 
     @Override
     public void onComplete() {
-        System.out.println("Created completed.");
+        System.out.println("Generation completed.");
     }
 }

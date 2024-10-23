@@ -1,6 +1,6 @@
 package com.codegenerator;
 
-import com.codegenerator.codegenerator.cli.commands.New.CodeGenCli;
+import com.codegenerator.codegenerator.cli.commands.cli.CodeGenCli;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import picocli.CommandLine;

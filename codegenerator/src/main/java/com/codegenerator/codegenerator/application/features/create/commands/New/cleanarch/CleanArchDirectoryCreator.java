@@ -1,20 +1,19 @@
 package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
 
 import com.codegenerator.core.application.constants.DirectoryPath;
+
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class DirectoryCreator {
+public class CleanArchDirectoryCreator {
 
     public static Collection<String> handle(Path basePath,String projectName) {
         List<String> createdDirectories = new ArrayList<>();
         try {
-            if (Files.exists(basePath)) {
-                throw new RuntimeException("Warning: The directory '" + projectName + "' already exists. Please choose a different name or remove the existing directory.");
-            }
 
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase())));
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.RESOURCES_PATH)));

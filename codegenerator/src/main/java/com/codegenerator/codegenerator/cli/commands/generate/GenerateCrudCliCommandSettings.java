@@ -31,7 +31,7 @@ public class GenerateCrudCliCommandSettings {
     public void checkProjectName() {
         if (projectName != null) {
             if (!new File(getProjectPath()).exists()) {
-                throw new RuntimeException("Project not found in \"" + getProjectPath() + "\".");
+                System.err.println("Project not found in \"" + getProjectPath() + "\".");
             }
             return;
         }
@@ -43,7 +43,7 @@ public class GenerateCrudCliCommandSettings {
 
         File[] projects = new File(System.getProperty("user.dir") + "/src/main/java/com").listFiles(File::isDirectory);
         if (projects == null || projects.length == 0) {
-            throw new RuntimeException("No projects found in src/main/java/com");
+            System.err.println("No projects found");
         }
         if (projects.length == 1) {
             projectName = projects[0].getName();
@@ -62,7 +62,7 @@ public class GenerateCrudCliCommandSettings {
 
         File[] entities = new File(Paths.get(getProjectPath(), "domain", "entities").toString()).listFiles();
         if (entities == null || entities.length == 0) {
-            throw new RuntimeException("No entities found in \"" + Paths.get(getProjectPath(), "domain", "entities").toString() + "\"");
+            System.err.println("No entities found in \"" + Paths.get(getProjectPath(), "domain", "entities").toString() + "\"");
         }
 
         System.out.println("Available entities:");
@@ -74,7 +74,7 @@ public class GenerateCrudCliCommandSettings {
         System.out.print("Select an entity by number: ");
         int selectedNumber = scanner.nextInt();
         if (selectedNumber < 1 || selectedNumber > entities.length) {
-            throw new RuntimeException("Invalid selection");
+            System.err.println("Invalid selection");
         }
         entityName = entities[selectedNumber - 1].getName().replace(".java", "");
         System.out.println("Selected entity is " + entityName);

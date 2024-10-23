@@ -40,12 +40,12 @@
 			<artifactId>picocli</artifactId>
 			<version>4.6.1</version>
 		</dependency>
-<!--		&lt;!&ndash; Picocli Spring Boot Entegrasyonu &ndash;&gt;
+
 		<dependency>
-			<groupId>info.picocli</groupId>
-			<artifactId>picocli-spring-boot-starter</artifactId>
-			<version>4.6.1</version>
-		</dependency>-->
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.14.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>

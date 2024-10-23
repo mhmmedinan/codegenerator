@@ -1,4 +1,4 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
+package com.codegenerator.codegenerator.application.features.common.New;
 
 
 import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
@@ -10,5 +10,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class NewProjectCommand {
+    private String architecture;
     private NewProjectData newProjectData;
 }

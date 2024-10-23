@@ -1,4 +1,4 @@
-package com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch;
+package com.codegenerator.codegenerator.application.features.common.generate;
 
 import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 import lombok.AllArgsConstructor;

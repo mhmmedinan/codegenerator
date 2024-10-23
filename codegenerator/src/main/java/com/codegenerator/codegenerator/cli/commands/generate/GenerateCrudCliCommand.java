@@ -1,13 +1,16 @@
 package com.codegenerator.codegenerator.cli.commands.generate;
 
+import com.codegenerator.codegenerator.application.features.common.generate.GenerateCrudCommandHandler;
+import com.codegenerator.codegenerator.application.features.common.responses.BaseResponse;
+import com.codegenerator.codegenerator.cli.commands.factory.CommandHandlerFactory;
 import com.codegenerator.core.codegen.code.JavaCodeReader;
 import com.codegenerator.core.codegen.code.valueobjects.PropertyInfo;
+import com.codegenerator.core.codegen.helpers.MetadataHelper;
 import com.codegenerator.core.codegen.templateengine.TemplateEngineImpl;
 import com.codegenerator.core.codegen.templateengine.freemarker.FreemarkerTemplateRenderer;
-import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.GenerateCommandHandler;
-import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.GenerateCrudCommand;
-import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.GenerateCrudSubscriber;
-import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.GeneratedCrudResponse;
+import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.CleanArchGenerateCrudCommandHandler;
+import com.codegenerator.codegenerator.application.features.common.generate.GenerateCrudCommand;
+import com.codegenerator.codegenerator.application.features.common.generate.GenerateCrudSubscriber;
 import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 import com.codegenerator.codegenerator.domain.valueobjects.Entity;
 import picocli.CommandLine.Command;
@@ -22,16 +25,18 @@ public class GenerateCrudCliCommand implements Runnable {
 
     private GenerateCrudCliCommandSettings settings;
 
-    private final GenerateCommandHandler handler;
-
     public GenerateCrudCliCommand() {
-        this.handler = new GenerateCommandHandler(new TemplateEngineImpl(new FreemarkerTemplateRenderer()));
         this.settings = new GenerateCrudCliCommandSettings();
     }
 
     @Override
     public void run() {
         try {
+
+            String architecture = MetadataHelper.getArchitectureFromMetadata(settings.getProjectPath());
+            CommandHandlerFactory factory = new CommandHandlerFactory();
+            GenerateCrudCommandHandler handler = factory.createGenerateHandler(architecture);
+
             settings.checkProjectName();
             settings.checkEntityArgument();
 
@@ -48,7 +53,7 @@ public class GenerateCrudCliCommand implements Runnable {
                             new Entity(settings.getEntityName(), entityIdType, entityProperties), settings.getProjectName()
             ));
 
-            SubmissionPublisher<GeneratedCrudResponse> publisher = new SubmissionPublisher<>();
+            SubmissionPublisher<BaseResponse> publisher = new SubmissionPublisher<>();
             GenerateCrudSubscriber subscriber = new GenerateCrudSubscriber();
 
             publisher.subscribe(subscriber);

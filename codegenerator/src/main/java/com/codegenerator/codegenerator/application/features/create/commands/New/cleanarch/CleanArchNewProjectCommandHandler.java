@@ -1,40 +1,56 @@
 package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
 
+import com.codegenerator.core.codegen.helpers.MetadataHelper;
+import com.codegenerator.codegenerator.application.features.common.New.NewProjectCommand;
+import com.codegenerator.codegenerator.application.features.common.New.NewProjectCommandHandler;
+import com.codegenerator.codegenerator.application.features.common.responses.BaseResponse;
 import com.codegenerator.codegenerator.domain.contants.Templates;
 import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
-import com.codegenerator.core.application.constants.DirectoryPath;
 import com.codegenerator.core.codegen.code.StringUtils;
 import com.codegenerator.core.codegen.file.DirectoryHelper;
 import com.codegenerator.core.codegen.helpers.PlatformHelper;
 import com.codegenerator.core.codegen.templateengine.TemplateEngine;
 import lombok.RequiredArgsConstructor;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.SubmissionPublisher;
 
 
 @RequiredArgsConstructor
-public class NewProjectCommandHandler extends SubmissionPublisher<NewProjectResponse> {
-
+public class CleanArchNewProjectCommandHandler extends NewProjectCommandHandler {
     private final TemplateEngine templateEngine;
 
+    @Override
     public void handle(NewProjectCommand request){
 
         try {
             String projectName = request.getNewProjectData().getProjectName();
             Path basePath = Paths.get(projectName);
-            NewProjectResponse response = new NewProjectResponse();
+            BaseResponse response = new BaseResponse();
             List<String> newFilePaths = new ArrayList<>();
             List<String> updatedFilePaths = new ArrayList<>();
 
-            newFilePaths.addAll(DirectoryCreator.handle(basePath,projectName));
-            response.setLastOperationMessage("Files have been created.");
+            File projectDirectory = basePath.toFile();
+            if (projectDirectory.exists() && projectDirectory.isDirectory()) {
+                System.out.println("The directory '" + projectName + "' already exists. Please choose a different name or remove the existing directory.");
+                this.close();
+                return;
+            }
+
+            newFilePaths.addAll(CleanArchDirectoryCreator.handle(basePath, projectName));
+            response.setLastOperationMessage("Project directories have been created.");
             this.submit(response);
+
+            MetadataHelper.createMetadataFile(basePath, request.getArchitecture(), projectName);
+
+
             newFilePaths.addAll(createConfigurationCodes(basePath, request.getNewProjectData()));
+            response.setLastOperationMessage("Configuration files (application.yml, pom.xml) have been created.");
             this.submit(response);
+
+
             response.setNewFilePathsResult(newFilePaths);
             response.setUpdatedFilePathsResult(updatedFilePaths);
             this.close();
@@ -67,8 +83,5 @@ public class NewProjectCommandHandler extends SubmissionPublisher<NewProjectResp
             throw new RuntimeException("Error while rendering files", e);
         }
     }
-
-
-
 
 }

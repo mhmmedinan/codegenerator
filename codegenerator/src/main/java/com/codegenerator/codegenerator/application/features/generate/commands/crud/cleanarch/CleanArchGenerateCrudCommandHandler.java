@@ -1,5 +1,8 @@
 package com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch;
 
+import com.codegenerator.codegenerator.application.features.common.generate.GenerateCrudCommandHandler;
+import com.codegenerator.codegenerator.application.features.common.responses.BaseResponse;
+import com.codegenerator.codegenerator.application.features.common.generate.GenerateCrudCommand;
 import com.codegenerator.core.codegen.code.StringUtils;
 import com.codegenerator.core.codegen.file.DirectoryHelper;
 import com.codegenerator.core.codegen.helpers.PlatformHelper;
@@ -11,13 +14,14 @@ import java.util.*;
 import java.util.concurrent.SubmissionPublisher;
 
 @RequiredArgsConstructor
-public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudResponse> {
+public class CleanArchGenerateCrudCommandHandler extends GenerateCrudCommandHandler {
 
     private final TemplateEngine templateEngine;
 
+    @Override
     public void handle(GenerateCrudCommand request) {
         try {
-            GeneratedCrudResponse response = new GeneratedCrudResponse();
+            BaseResponse response = new BaseResponse();
             List<String> newFilePaths = new ArrayList<>();
             List<String> updatedFilePaths = new ArrayList<>();
 
@@ -28,6 +32,7 @@ public class GenerateCommandHandler extends SubmissionPublisher<GeneratedCrudRes
 
             newFilePaths.addAll(generateApplicationCodes(request.getProjectPath(), request.getCrudTemplateData()));
             response.setLastOperationMessage("Application layer codes have been generated.");
+            response.setCurrentStatusMessage("Generating WebAPI layer codes...");
             this.submit(response);
 
             newFilePaths.addAll(generateWebAPICodes(request.getProjectPath(), request.getCrudTemplateData()));
