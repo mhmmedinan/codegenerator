@@ -1,8 +1,7 @@
 package com.codegenerator.core.codegen.templateengine;
 
 import com.codegenerator.core.codegen.file.FileHelper;
-import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
-import com.codegenerator.pipelinearchgen.domain.valueobjects.NewProjectData;
+import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 import org.springframework.stereotype.Service;
 import java.nio.file.Files;
 import java.nio.file.Paths;

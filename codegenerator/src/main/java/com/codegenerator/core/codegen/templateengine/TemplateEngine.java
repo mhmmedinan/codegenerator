@@ -1,7 +1,6 @@
 package com.codegenerator.core.codegen.templateengine;
 
-import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
-import com.codegenerator.pipelinearchgen.domain.valueobjects.NewProjectData;
+import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 
 import java.util.List;
 import java.util.Map;

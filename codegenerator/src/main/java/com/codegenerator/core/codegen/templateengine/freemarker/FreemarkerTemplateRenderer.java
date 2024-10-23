@@ -1,13 +1,11 @@
 package com.codegenerator.core.codegen.templateengine.freemarker;
 
-import com.codegenerator.core.codegen.code.StringUtils;
 import com.codegenerator.core.codegen.templateengine.TemplateRenderer;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
-import com.codegenerator.pipelinearchgen.domain.valueobjects.CrudTemplateData;
-import com.codegenerator.pipelinearchgen.domain.valueobjects.NewProjectData;
+import com.codegenerator.codegenerator.domain.valueobjects.CrudTemplateData;
 import freemarker.template.*;
 import org.springframework.stereotype.Service;
 import java.io.StringWriter;

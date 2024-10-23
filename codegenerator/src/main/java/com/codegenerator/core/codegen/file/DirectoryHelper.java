@@ -18,7 +18,7 @@ public class DirectoryHelper {
         if (paths.length > 0) {
             Path firstPath = Paths.get(paths[0]);
             Path projectRoot = firstPath.getParent().getParent();
-            Path templatePath = projectRoot.resolve(Paths.get("src", "main", "java", "com", "codegenerator", "pipelinearchgen", "domain"));
+            Path templatePath = projectRoot.resolve(Paths.get("src", "main", "java", "com", "codegenerator", "codegenerator", "domain"));
             return templatePath.toString();
         }
 
