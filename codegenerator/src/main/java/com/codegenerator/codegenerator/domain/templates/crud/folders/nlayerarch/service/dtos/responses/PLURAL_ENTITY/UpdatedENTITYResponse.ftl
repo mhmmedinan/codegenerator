@@ -12,6 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Updated${entity.name?cap_first}Response {
 <#list entity.properties as propertyItem>
-private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
+<#if propertyItem.annotations?has_content && propertyItem.annotations?seq_contains("@ManyToOne")>
+private ${entity.idType} ${string("camelcase", propertyItem.name)}Id;
+<#else>
+private ${propertyItem.type} ${string("camelcase", propertyItem.name)};
+</#if>
 </#list>
 }

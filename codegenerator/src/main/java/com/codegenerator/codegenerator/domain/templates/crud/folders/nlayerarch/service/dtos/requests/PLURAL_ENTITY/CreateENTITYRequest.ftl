@@ -9,7 +9,11 @@ import lombok.*;
 public class Create${entity.name?cap_first}Request {
 <#list entity.properties as propertyItem>
 <#if propertyItem.name != "id">
-private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
+<#if propertyItem.annotations?has_content && propertyItem.annotations?seq_contains("@ManyToOne")>
+private ${entity.idType} ${string("camelcase", propertyItem.name)}Id;
+<#else>
+private ${propertyItem.type} ${string("camelcase", propertyItem.name)};
+</#if>
 </#if>
 </#list>
 }

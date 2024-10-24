@@ -68,7 +68,7 @@ public class JavaCodeReader {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-
+                Pattern annotationPattern = Pattern.compile("@\\w+");
                 Pattern propertyPattern = Pattern.compile("(private|protected|public)\\s+(static\\s+)?(\\w+)\\s+(\\w+);");
                 Pattern builtInTypePattern = Pattern.compile("^(boolean|byte|char|double|float|int|long|object|short|String)$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = propertyPattern.matcher(fileContent);
@@ -80,6 +80,13 @@ public class JavaCodeReader {
                     String name = matcher.group(4);
                     String typeName = type.replace("?", "");
                     String nameSpace = null;
+
+                    List<String> annotations = new ArrayList<>();
+                    Matcher annotationMatcher = annotationPattern.matcher(fileContent.substring(0, matcher.start()));
+                    while (annotationMatcher.find()) {
+                        annotations.add(annotationMatcher.group());
+                    }
+
 
                     if (!builtInTypePattern.matcher(typeName).matches()) {
                         List<String> potentialPropertyTypeFilePaths = DirectoryHelper.getFilesInDirectoryTree(projectPath, typeName + ".java");
@@ -99,7 +106,7 @@ public class JavaCodeReader {
                         }
                     }
 
-                    PropertyInfo propertyInfo = new PropertyInfo(name, type, accessModifier, nameSpace);
+                    PropertyInfo propertyInfo = new PropertyInfo(name, type, accessModifier, nameSpace,annotations);
                     properties.add(propertyInfo);
                 }
 

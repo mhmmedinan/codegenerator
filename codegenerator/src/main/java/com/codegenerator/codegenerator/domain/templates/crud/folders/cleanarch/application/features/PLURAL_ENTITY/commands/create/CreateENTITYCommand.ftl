@@ -11,8 +11,12 @@ import lombok.*;
 @ToString
 public class Create${entity.name?cap_first}Command implements Command<Created${entity.name?cap_first}Response> {
     <#list entity.properties as propertyItem>
-      <#if propertyItem.name != "id">
-    private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
-      </#if>
+    <#if propertyItem.name != "id">
+    <#if propertyItem.annotations?has_content && propertyItem.annotations?seq_contains("@ManyToOne")>
+    private ${entity.idType} ${string("camelcase", propertyItem.name)}Id;
+    <#else>
+     private ${propertyItem.type} ${string("camelcase", propertyItem.name)};
+     </#if>
+     </#if>
     </#list>
 }
