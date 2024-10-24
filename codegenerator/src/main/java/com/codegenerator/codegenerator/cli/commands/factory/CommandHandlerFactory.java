@@ -5,6 +5,7 @@ import com.codegenerator.codegenerator.application.features.create.commands.New.
 import com.codegenerator.codegenerator.application.features.common.New.NewProjectCommandHandler;
 import com.codegenerator.codegenerator.application.features.create.commands.New.nlayerarch.NLayerArchNewProjectCommandHandler;
 import com.codegenerator.codegenerator.application.features.generate.commands.crud.cleanarch.CleanArchGenerateCrudCommandHandler;
+import com.codegenerator.codegenerator.application.features.generate.commands.crud.nlayerarch.NLayerArchGenerateCrudCommandHandler;
 import com.codegenerator.core.codegen.templateengine.TemplateEngine;
 import com.codegenerator.core.codegen.templateengine.TemplateEngineImpl;
 import com.codegenerator.core.codegen.templateengine.freemarker.FreemarkerTemplateRenderer;
@@ -30,8 +31,10 @@ public class CommandHandlerFactory {
     public GenerateCrudCommandHandler createGenerateHandler(String architecture) {
         return switch (architecture.toLowerCase()) {
             case "cleanarch" -> new CleanArchGenerateCrudCommandHandler(templateEngine);
-           // case "nlayer" -> //new NLayerArchNewProjectCommandHandler(templateEngine);
+            case "nlayerarch" -> new NLayerArchGenerateCrudCommandHandler(templateEngine);
             default -> throw new IllegalArgumentException("Unsupported architecture: " + architecture);
         };
     }
+
+
 }

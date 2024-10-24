@@ -5,7 +5,7 @@ import com.${projectName?lower_case}.service.dtos.requests.${string("camelcase",
 import com.${projectName?lower_case}.service.dtos.responses.${string("camelcase", pluralEntityName)}.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import an.awesome.pipelinr.Pipeline;
+import com.${projectName?lower_case}.service.abstracts.${entity.name?cap_first}Service;
 import java.util.List;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class ${entity.name?cap_first}sController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Deleted${entity.name?cap_first}Response> delete(@PathVariable ${entity.idType} id) {
-        Delete${entity.name?cap_first}Request request = new Delete{entity.name?cap_first}Request(id);
+        Delete${entity.name?cap_first}Request request = new Delete${entity.name?cap_first}Request(id);
         Deleted${entity.name?cap_first}Response response = ${string("camelcase", entity.name)}Service.delete(request);
         return ResponseEntity.ok(response);
     }
@@ -41,7 +41,7 @@ public class ${entity.name?cap_first}sController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Get${entity.name?cap_first}Response>> getById(@PathVariable ${entity.idType} id) {
+    public ResponseEntity<Get${entity.name?cap_first}Response> getById(@PathVariable ${entity.idType} id) {
        Get${entity.name?cap_first}Response response = ${string("camelcase", entity.name)}Service.getById(id);
        return ResponseEntity.ok(response);
     }

@@ -1,35 +1,48 @@
 package com.codegenerator.codegenerator.cli.commands.generate;
 
+import com.codegenerator.codegenerator.cli.commands.common.CrudCliCommandSettings;
+import com.codegenerator.core.codegen.code.valueobjects.PropertyInfo;
 import lombok.Getter;
 import lombok.Setter;
 import picocli.CommandLine.Option;
 import java.io.File;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 
 @Getter
 @Setter
-public class GenerateCrudCliCommandSettings {
+public class CleanArchGenerateCrudCliCommandSettings extends CrudCliCommandSettings {
 
-    @Option(names = { "-p", "--project" }, description = "Name of the project")
-    private String projectName;
-
-    @Option(names = { "-e", "--entity" }, description = "Name of the entity")
-    private String entityName;
 
 
     public String getProjectPath() {
-        return projectName != null
-                ? Paths.get(System.getProperty("user.dir"), "src", "main", "java", "com", projectName.toLowerCase()).toString()
+        return getProjectName() != null
+                ? Paths.get(System.getProperty("user.dir"), "src", "main", "java", "com", getProjectName() .toLowerCase()).toString()
                 : System.getProperty("user.dir");
 
     }
 
+    @Override
+    public Path getEntityPath() {
+        return Paths.get(getProjectPath(), "domain", "entities", getEntityName() + ".java");
+    }
+
+    @Override
+    public String getEntityIdType(List<PropertyInfo> entityProperties) {
+        Optional<PropertyInfo> idProperty = entityProperties.stream()
+                .filter(property -> property.getName().equals("id"))
+                .findFirst();
+        return idProperty.map(PropertyInfo::getType).orElse("Long");
+    }
+
 
     public void checkProjectName() {
-        if (projectName != null) {
+        if (getProjectName()  != null) {
             if (!new File(getProjectPath()).exists()) {
                 System.err.println("Project not found in \"" + getProjectPath() + "\".");
             }
@@ -46,17 +59,17 @@ public class GenerateCrudCliCommandSettings {
             System.err.println("No projects found");
         }
         if (projects.length == 1) {
-            projectName = projects[0].getName();
+            setProjectName(projects[0].getName());
             return;
         }
 
-        projectName = selectProjectFromPrompt(projects);
+        setProjectName(selectProjectFromPrompt(projects));
     }
 
 
     public void checkEntityArgument() {
-        if (entityName != null) {
-            System.out.println("Selected entity is " + entityName);
+        if (getEntityName() != null) {
+            System.out.println("Selected entity is " + getEntityName());
             return;
         }
 
@@ -76,8 +89,8 @@ public class GenerateCrudCliCommandSettings {
         if (selectedNumber < 1 || selectedNumber > entities.length) {
             System.err.println("Invalid selection");
         }
-        entityName = entities[selectedNumber - 1].getName().replace(".java", "");
-        System.out.println("Selected entity is " + entityName);
+        setEntityName(entities[selectedNumber - 1].getName().replace(".java", ""));
+        System.out.println("Selected entity is " + getEntityName());
     }
 
 
