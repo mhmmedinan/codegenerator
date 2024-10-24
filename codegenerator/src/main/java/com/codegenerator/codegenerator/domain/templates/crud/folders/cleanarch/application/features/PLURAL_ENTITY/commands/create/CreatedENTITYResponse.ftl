@@ -10,8 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Created${entity.name}Response {
-
+public class Created${entity.name?cap_first}Response {
       <#list entity.properties as propertyItem>
       private ${propertyItem.type} ${string("camelcase",propertyItem.name)};
       </#list>
