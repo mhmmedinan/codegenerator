@@ -17,7 +17,6 @@ public class CleanArchDirectoryCreator {
 
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase())));
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.RESOURCES_PATH)));
-            createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase())));
 
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase() + DirectoryPath.Paths.APPLICATION_FEATURES_PATH)));
             createdDirectories.add(createDirectory(basePath.resolve(DirectoryPath.Paths.BASE_PATH + projectName.toLowerCase() + DirectoryPath.Paths.APPLICATION_SERVICES_PATH)));

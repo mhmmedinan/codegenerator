@@ -2,7 +2,10 @@ package com.codegenerator.core.application.constants;
 
 public class DirectoryPath {
     public static class Paths{
+
         public static final String BASE_PATH = "src\\main\\java\\com\\";
+
+        //Clean Architecture
         public static final String BASE_APPLICATION_PATH = "\\application";
         public static final String BASE_PERSISTENCE_PATH = "\\persistence";
         public static final String BASE_INFRASTRUCTURE_PATH = "\\infrastructure";
@@ -17,6 +20,13 @@ public class DirectoryPath {
         public static final String DOMAIN_ENTITIES_PATH = BASE_DOMAIN_PATH + "\\entities";
         public static final String INFRASTRUCTURE_ADAPTERS_PATH = BASE_INFRASTRUCTURE_PATH + "\\adapters";
         public static final String WEBAPI_CONTROLLER_PATH = BASE_WEBAPI_PATH + "\\controllers";
+
+        //NLayer Architecture
+        public static final String BASE_SERVICE_PATH = "\\service";
+        public static final String BASE_REPOSITORY_PATH = "\\repository";
+        public static final String BASE_ENTITY_PATH = "\\entity";
+        public static final String BASE_CONTROLLER_PATH = "\\controller";
+
 
 
     }

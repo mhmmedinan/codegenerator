@@ -1,6 +1,5 @@
-package com.codegenerator.codegenerator.application.features.create.commands.New.cleanarch;
+package com.codegenerator.codegenerator.application.features.create.commands.New.nlayerarch;
 
-import com.codegenerator.core.codegen.helpers.MetadataHelper;
 import com.codegenerator.codegenerator.application.features.common.New.NewProjectCommand;
 import com.codegenerator.codegenerator.application.features.common.New.NewProjectCommandHandler;
 import com.codegenerator.codegenerator.application.features.common.responses.BaseResponse;
@@ -8,23 +7,22 @@ import com.codegenerator.codegenerator.domain.contants.Templates;
 import com.codegenerator.codegenerator.domain.valueobjects.NewProjectData;
 import com.codegenerator.core.codegen.code.StringUtils;
 import com.codegenerator.core.codegen.file.DirectoryHelper;
+import com.codegenerator.core.codegen.helpers.MetadataHelper;
 import com.codegenerator.core.codegen.helpers.PlatformHelper;
 import com.codegenerator.core.codegen.templateengine.TemplateEngine;
 import lombok.RequiredArgsConstructor;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-
 @RequiredArgsConstructor
-public class CleanArchNewProjectCommandHandler extends NewProjectCommandHandler {
+public class NLayerArchNewProjectCommandHandler extends NewProjectCommandHandler {
+
     private final TemplateEngine templateEngine;
 
     @Override
-    public void handle(NewProjectCommand request){
-
+    public void handle(NewProjectCommand request) {
         try {
             String projectName = request.getNewProjectData().getProjectName();
             Path basePath = Paths.get(projectName);
@@ -39,7 +37,7 @@ public class CleanArchNewProjectCommandHandler extends NewProjectCommandHandler 
                 return;
             }
 
-            newFilePaths.addAll(CleanArchDirectoryCreator.handle(basePath, projectName));
+            newFilePaths.addAll(NLayerArchDirectoryCreator.handle(basePath, projectName));
             response.setLastOperationMessage("Project directories have been created.");
             this.submit(response);
 
@@ -83,5 +81,4 @@ public class CleanArchNewProjectCommandHandler extends NewProjectCommandHandler 
             throw new RuntimeException("Error while rendering files", e);
         }
     }
-
 }
